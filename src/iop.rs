@@ -351,7 +351,7 @@ pub fn get_iop_combos() -> Vec<SpellCombo> {
                 spell_cost_1_wp,
                 spell_cost_1_ap,
             ],
-            effect: "2PA autour du Iop".to_owned(),
+            effect: "2 PA autour du Iop".to_owned(),
         },
         SpellCombo {
             name: "Combo poussé".to_owned(),
