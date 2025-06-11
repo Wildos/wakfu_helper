@@ -1,4 +1,3 @@
-#![warn(clippy::all, rust_2018_idioms)]
-
-mod app;
-pub use app::TemplateApp;
+mod egui_app;
+mod iop;
+pub use egui_app::WakfuHelperEguiApp;

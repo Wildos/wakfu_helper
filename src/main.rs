@@ -1,26 +1,28 @@
-#![warn(clippy::all, rust_2018_idioms)]
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
+use egui::Vec2;
 
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() -> eframe::Result {
+    const WINDOW_SIZE_MIN: Vec2 = Vec2::new(300.0, 530.0);
+    const WINDOW_SIZE_DEFAULT: Vec2 = Vec2::new(380.0, 700.0);
+    // const WINDOW_SIZE_MAX: Vec2 = Vec2::new(580.0, 900.0);
     env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
 
     let native_options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_inner_size([400.0, 300.0])
-            .with_min_inner_size([300.0, 220.0])
-            .with_icon(
-                // NOTE: Adding an icon is optional
-                eframe::icon_data::from_png_bytes(&include_bytes!("../assets/icon-256.png")[..])
-                    .expect("Failed to load icon"),
-            ),
+            .with_inner_size(WINDOW_SIZE_DEFAULT)
+            // .with_max_inner_size(WINDOW_SIZE_MAX)
+            .with_min_inner_size(WINDOW_SIZE_MIN),
+        // .with_resizable(false),
         ..Default::default()
     };
     eframe::run_native(
-        "eframe template",
+        "wakfu_helper",
         native_options,
-        Box::new(|cc| Ok(Box::new(eframe_template::TemplateApp::new(cc)))),
+        Box::new(|cc| {
+            egui_extras::install_image_loaders(&cc.egui_ctx);
+            Ok(Box::new(wakfu_helper::WakfuHelperEguiApp::new(cc)))
+        }),
     )
 }
 
@@ -50,7 +52,10 @@ fn main() {
             .start(
                 canvas,
                 web_options,
-                Box::new(|cc| Ok(Box::new(eframe_template::TemplateApp::new(cc)))),
+                Box::new(|cc| {
+                    egui_extras::install_image_loaders(&cc.egui_ctx);
+                    Ok(Box::new(wakfu_helper::WakfuHelperEguiApp::new(cc)))
+                }),
             )
             .await;
 
