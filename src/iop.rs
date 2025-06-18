@@ -295,9 +295,9 @@ pub fn get_iop_spells(deck_string: &str) -> SpellBook {
         name: "Tannée".to_owned(),
         icon: egui::include_image!("../assets/air_spell.png"),
         cost: SpellCost {
-            ap: Cost::FixedCost(3),
+            ap: Cost::FixedCost(4),
             mp: 0,
-            wp: 1,
+            wp: 0,
         },
         spell_id: 4788,
     });
@@ -305,7 +305,7 @@ pub fn get_iop_spells(deck_string: &str) -> SpellBook {
         name: "Epée de Iop".to_owned(),
         icon: egui::include_image!("../assets/air_spell.png"),
         cost: SpellCost {
-            ap: Cost::FixedCost(4),
+            ap: Cost::FixedCost(3),
             mp: 0,
             wp: 0,
         },
