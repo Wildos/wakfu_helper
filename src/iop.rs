@@ -110,7 +110,7 @@ pub struct SpellBook<'a> {
 }
 
 impl<'a> SpellBook<'a> {
-    pub fn get_matching_spell(&self, cost: &SpellCost) -> Vec<&Spell> {
+    pub fn get_matching_spell(&self, cost: &SpellCost) -> Vec<&Spell<'a>> {
         let mut matching_spells = vec![];
         for spell in self.spells.iter() {
             if !self.deck.contains(&spell.spell_id) {
@@ -124,7 +124,7 @@ impl<'a> SpellBook<'a> {
     }
 }
 
-pub fn get_iop_spells(deck_string: &str) -> SpellBook {
+pub fn get_iop_spells<'a>(deck_string: &'a str) -> SpellBook<'a> {
     let mut spell_book = SpellBook {
         spells: Vec::new(),
         deck: vec![0],
@@ -303,7 +303,7 @@ pub fn get_iop_spells(deck_string: &str) -> SpellBook {
     });
     spell_book.spells.push(Spell {
         name: "Epée de Iop".to_owned(),
-        icon: egui::include_image!("../assets/air_spell.png"),
+        icon: egui::include_image!("../assets/epee_de_iop.png"),
         cost: SpellCost {
             ap: Cost::FixedCost(3),
             mp: 0,
